@@ -12,14 +12,14 @@ def check_guess(guess):
     if guess in word:
         print(f"Good guess!{guess} is in the word")
     else:
-        print(f"Sorry, {guess} is not i n the word. Try again.")
+        print(f"Sorry, {guess} is not in the word. Try again.")
 
 #check if input is valid
 def ask_for_input():
     while True:
             try:
                 guess = input('Guess a letter: ')
-                if guess==1 and guess.isalpha():
+                if len(guess)==1 and guess.isalpha():
                     break
             except:
                 print('Invalid letter. Please, enter a single alphabetical character.')
