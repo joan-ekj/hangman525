@@ -7,6 +7,11 @@ This game has twom main functions:
 1) check_guess: this function checks that the the user guess is valid
 2) ask_for_input: this function checks that the user input is valid
 
+Lessons 
+1) Object-Oriented Programming (OOP) - I've been able to practice OOP concepts in Python. The flow of the game follows codes encapsulation within a class 'Hangman' ...
+2) Data Structure
+3) 
+
 ## Installation 
 This code is written in Python.
 
