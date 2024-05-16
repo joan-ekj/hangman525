@@ -3,11 +3,12 @@ import random
 
 
 class Hangman:
+        # TODO - docstrings to define class attributes 
     def __init__(self, word_list, num_lives=5):
         self.word_list = word_list
         self.num_lives = num_lives
-        self.word = random.choice(word_list)
-        self.word_guessed =['_' for _ in self.word]
+        self.word = random.choice(self.word_list)
+        self.word_guessed = ['_' for _ in self.word]
         self.num_letters = len(set(self.word))
         self.list_of_guesses = [] 
     
@@ -20,7 +21,7 @@ class Hangman:
         If the guess is correct:
         - if the guess is correct, num_letters left to guess decreases.
         If the guess is incorrect:
-        - num_letters left to guess decreases as well as num_lives
+        - num_lives decreases by one.
 
         Parameters:
             guess(str): The letter guessed by player.
@@ -30,19 +31,21 @@ class Hangman:
         '''
         guess = guess.lower()
         if guess in self.word:
-            print(f"Good guess!{guess} is in the word")
+            print(f"Good guess! {guess} is in the word")
             for index, letter in enumerate(self.word):
                 if guess == letter:
                     self.word_guessed[index] = guess
-                self.num_letters -= 1 # Decrease num_letters for each correct guess
+            self.num_letters -= 1 # Decrease num_letters for each correct guess
+        
         else: 
-            self.num_letters -= 1 
-            print(f"Sorry, {letter} is not in the word.")
+            self.num_lives -= 1 
+            print(f"Sorry, {guess} is not in the word.")
             print(f"You have {self.num_lives} lives left.")
             
 
     def ask_for_input(self):
-         '''
+         
+        '''
          This function checks if the letter guessed is valid.
 
          The purpose of this function is to prompt the player to guess a letter and check that it is a valid a single alphabetical character. 
@@ -53,22 +56,21 @@ class Hangman:
          Parameters:
             None
 
-        Return:
+         Return:
             None
-         '''
-         while True:
-                guess = input('Guess a letter: ')
-                if len(guess)!=1 and not guess.isalpha():
-                    print('Invalid letter: "{guess}". Please, enter a single alphabetical character.')
-                elif guess in self.list_of_guesses:
-                    print('You already tried that letter!')
-                else:
-                    self.check_guess(guess)
-                    self.list_of_guesses.append(guess)
-                    break
+        '''
+        guess = input('Guess a letter: ')
+        if len(guess)!=1 and not guess.isalpha():
+            print('Invalid letter: "{guess}". Please, enter a single alphabetical character.')
+        elif guess in self.list_of_guesses:
+            print('You already tried that letter!')
+        else:
+            self.check_guess(guess)
+            self.list_of_guesses.append(guess)
+             
 
 
-    def play_game(self, word_list):
+def play_game(word_list):
         '''
         This function creates an instance of the Hangman class.
 
@@ -77,7 +79,7 @@ class Hangman:
         - The player correctly guesses all letters in the word before running out of lives (`num_lives > 0` and `num_letters == 0`), in which case the message "Congratulations. You have won the game!" is printed.
 
         Parameter:
-            word_list(list): A list of words from which the word to be guessed is randomly selected from. 
+            word_list(list): A list of words from which the word to be guessed is randomly selected. 
         
         Return:
             None
@@ -89,8 +91,11 @@ class Hangman:
                 print('You lost!')
                 break
             elif game.num_letters > 0:
-                game.ask_for_input()
-            else:
+                 game.ask_for_input()
+            elif game.num_lives != 0 and game.num_letters == 0:
                 print('Congratulations. You have won the game!')
                 break
+           
+                
 
+play_game(['apple', 'banana'])
